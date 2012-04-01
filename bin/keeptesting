@@ -22,16 +22,33 @@ def parse_options
   return options
 end
 
-def run(cmd)
-  puts `#{cmd}` 
+def test_success?(test_output, failure_regex)
+  true unless test_output =~ /#{failure_regex}/
+end
+
+def testrun(options)
+  puts `clear`
+  puts "RUNNING TESTS..."
+  
+  cmd = options[:test_command]
+  test_output = `#{cmd}`
+  test_succeded = test_success?(test_output, options[:failure_regex])
+  puts `clear`
+  if test_succeded
+    puts "SUCCESS!\n\n\n"
+  else
+    puts "FAILURE!\n\n\n"
+  end
+
+  puts test_output
 end 
 
 def start_test_loop(options)
-  cmd = options[:test_command]
+  testrun(options)
   FSSM.monitor('.', '**/*') do
-    update {|base, relative| run(cmd)}
-    delete {|base, relative| run(cmd)}
-    create {|base, relative| run(cmd)}
+    update {|base, relative| testrun(options)}
+    delete {|base, relative| testrun(options)}
+    create {|base, relative| testrun(options)}
   end
 end
 

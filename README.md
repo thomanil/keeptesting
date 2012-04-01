@@ -2,7 +2,14 @@
 DESCRIPTION:
 ===========
 
-TODO
+The simplest way to autotest your code - no matter what language or
+framework you use.
+
+Run it from the command line. Specify 1) how tests are launched and 2)
+how a failed test looks in the terminal.
+
+The tests will run on every file change in your project - results are
+fed back through a pretty html console.
 
 USAGE:
 ======
