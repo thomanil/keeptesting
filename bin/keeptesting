@@ -22,35 +22,6 @@ def parse_options
   return options
 end
 
-def test_success?(test_output, failure_regex)
-  true unless test_output =~ /#{failure_regex}/
-end
-
-def testrun(options)
-  puts `clear`
-  puts "RUNNING TESTS..."
-  
-  cmd = options[:test_command]
-  test_output = `#{cmd}`
-  test_succeded = test_success?(test_output, options[:failure_regex])
-  puts `clear`
-  if test_succeded
-    puts "SUCCESS!\n\n\n"
-  else
-    puts "FAILURE!\n\n\n"
-  end
-
-  puts test_output
-end 
-
-def start_test_loop(options)
-  testrun(options)
-  FSSM.monitor('.', '**/*') do
-    update {|base, relative| testrun(options)}
-    delete {|base, relative| testrun(options)}
-    create {|base, relative| testrun(options)}
-  end
-end
 
 options = parse_options
 
@@ -58,5 +29,4 @@ if !options[:failure_regex] || !options[:test_command]
   puts "ERROR: missing args!" # TODO do this in optionsparse step above
 end
 
-start_test_loop(options)
-
+Keeptesting:CLI:start_test_loop(options)
