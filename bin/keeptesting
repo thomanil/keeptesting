@@ -1,0 +1,45 @@
+#!/usr/bin/env ruby
+
+require "keeptesting"
+require "optparse"
+require 'fssm'
+
+def parse_options
+  options = {}
+
+  OptionParser.new do |o|
+    o.banner = "Usage: keeptesting [options] -f 'FAILURE-MATCHING-REGEX' -t 'TEST-COMMAND'"
+    
+    o.on("-f F", "--failure-matching-regex", "A regex that matches failing tests") { |f| options[:failure_regex] = f } 
+    o.on("-t T", "--test-command", "Command to start your test(s)") { |t| options[:test_command] = t }
+    
+    o.on("-h", "--help", "Help page") { puts o; exit }
+    o.on("-v", "--version", "Spit out version") { |b| puts Keeptesting::VERSION; exit }
+
+    o.parse!
+  end
+
+  return options
+end
+
+def run(cmd)
+  puts `#{cmd}` 
+end 
+
+def start_test_loop(options)
+  cmd = options[:test_command]
+  FSSM.monitor('.', '**/*') do
+    update {|base, relative| run(cmd)}
+    delete {|base, relative| run(cmd)}
+    create {|base, relative| run(cmd)}
+  end
+end
+
+options = parse_options
+
+if !options[:failure_regex] || !options[:test_command]
+  puts "ERROR: missing args!" # TODO do this in optionsparse step above
+end
+
+start_test_loop(options)
+
