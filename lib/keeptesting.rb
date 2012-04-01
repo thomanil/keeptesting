@@ -1,5 +1,6 @@
 require "keeptesting/version"
-require "keeptesting/core"
+require "keeptesting/cli"
+require "keeptesting/html_console"
 
 module Keeptesting
   

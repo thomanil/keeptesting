@@ -29,4 +29,5 @@ if !options[:failure_regex] || !options[:test_command]
   puts "ERROR: missing args!" # TODO do this in optionsparse step above
 end
 
-Keeptesting:CLI:start_test_loop(options)
+#Keeptesting::CLI::start_test_loop(options)
+Keeptesting::HtmlConsole::start_test_loop(options)
