@@ -34,7 +34,7 @@ end
 if options[:cli_mode]
   Keeptesting::CLI::start_test_loop(options)
 else
-  Keeptesting::HtmlConsole::start_test_loop(options)
+  Keeptesting::BrowserConsole.new(options)
 end
 
 

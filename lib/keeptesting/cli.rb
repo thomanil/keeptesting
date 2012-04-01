@@ -2,18 +2,14 @@
 
 module Keeptesting
   module CLI
-    
-    def self.test_success?(test_output, failure_regex)
-      true unless test_output =~ /#{failure_regex}/
-    end
-    
+        
     def self.testrun(options)
       puts `clear`
       puts "RUNNING TESTS..."
       
       cmd = options[:test_command]
       test_output = `#{cmd}`
-      test_succeded = test_success?(test_output, options[:failure_regex])
+      test_succeded = Keeptesting::Common::test_success?(test_output, options[:failure_regex])
       puts `clear`
       if test_succeded
         puts "SUCCESS!\n\n\n"
