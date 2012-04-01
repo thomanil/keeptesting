@@ -6,7 +6,7 @@ module Keeptesting
     def self.test_success?(test_output, failure_regex)
       true unless test_output =~ /#{failure_regex}/
     end
-
+    
     def self.testrun(options)
       puts `clear`
       puts "RUNNING TESTS..."
