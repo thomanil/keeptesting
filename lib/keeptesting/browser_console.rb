@@ -56,9 +56,15 @@ module Keeptesting
     end
 
     def start_console
+
+#      puts "FILE: -#{__FILE__}-"
+      
+      webconsole_path = File.dirname(__FILE__) + '/./webconsole.rb'
+      puts webconsole_path
+      
       puts "keeptesting web console starting - goto http://localhost:5000"
       puts "---"
-      puts `ruby -Ilib webconsole.rb -e development -p 5000`
+      puts `ruby #{webconsole_path} -e development -p 5000`
     end
    
   end
