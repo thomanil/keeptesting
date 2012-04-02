@@ -14,7 +14,15 @@ fed back through a pretty html console.
 USAGE:
 ======
 
-TODO
+`keeptesting [options] -f REGEX_MATCHING_TEST_FAILURE -t TEST_COMMAND`
+
+
+EXAMPLES:
+======
+
+In ruby:
+
+`keeptesting -f 'Failure|Error' -t 'rake test'`
 
 
 PREREQUISITES:
