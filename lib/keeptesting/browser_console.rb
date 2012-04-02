@@ -9,7 +9,7 @@ module Keeptesting
   class BrowserConsole
 
     def initialize(options={})
-      #watch_tests_in_other_thread(options)
+      watch_files(options)
       start_console
     end
     
@@ -22,13 +22,13 @@ module Keeptesting
       end
     end
 
-    def retrieve_last_test_summary
-      result = false
-      output = ""
-      File.open RESULT_FILE_PATH, "r" do |filebody|
-        result = filebody.lines.first
-        output = filebody.to_s
-      end
+    def self.retrieve_last_test_summary
+      file = File.open(RESULT_FILE_PATH, "rb")
+      contents = file.read
+
+      result = contents.lines.first
+      output = contents.lines.to_a[1..-1].join("\n")
+      
       return result, output
     end
     
@@ -39,22 +39,22 @@ module Keeptesting
       store_last_test_summary(test_succeeded, test_output)
     end
 
-    def watch_tests_in_other_thread(options)
-      puts "Starting test loop"
-      #Thread.new do
-      console = self
-      FSSM.monitor('.', '**/*') do
-        update {|base, relative| console.testrun(options)}
-        delete {|base, relative| console.testrun(options)}
-        create {|base, relative| console.testrun(options)}
+    def watch_files(options)
+      Thread.new do
+        console = self
+        console.testrun(options)
+        FSSM.monitor('.', '**/*') do
+          update {|base, relative| console.testrun(options)}
+          delete {|base, relative| console.testrun(options)}
+          create {|base, relative| console.testrun(options)}
+        end
       end
-      #end
     end
 
     def start_console
       puts "keeptesting web console starting - goto http://localhost:5000"
       puts "---"
-      puts `ruby -Ilib webconsole.rb -p 5000`
+      puts `ruby -Ilib webconsole.rb -e development -p 5000`
     end
    
   end

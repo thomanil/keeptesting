@@ -4,12 +4,10 @@ require 'sinatra'
 require 'keeptesting'
 
 get '/' do
-  console = Keeptesting::BrowserConsole.new
-  @result, @output = console.retrieve_last_test_summary
-  
   erb :index
 end
 
 get '/latest-test' do
+  @result, @output = Keeptesting::BrowserConsole.retrieve_last_test_summary
   erb :latest_test, :layout => false
 end
