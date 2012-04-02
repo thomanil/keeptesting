@@ -57,7 +57,7 @@ module Keeptesting
 
     def start_console
 
-#      puts "FILE: -#{__FILE__}-"
+      puts "FILE: -#{__FILE__}-"
       
       webconsole_path = File.dirname(__FILE__) + '/./webconsole.rb'
       puts webconsole_path
