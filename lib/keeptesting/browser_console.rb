@@ -59,7 +59,7 @@ module Keeptesting
 
       puts "FILE: -#{__FILE__}-"
       
-      webconsole_path = File.dirname(__FILE__) + '/./webconsole.rb'
+      webconsole_path = File.dirname(__FILE__) + '/../../webconsole.rb'
       puts webconsole_path
       
       puts "keeptesting web console starting - goto http://localhost:5000"
