@@ -2,19 +2,25 @@
 
 module Keeptesting
   module CLI
-        
+
+    GREEN_TEXT="\033[32m"
+    YELLOW_TEXT="\033[33m"
+    RED_TEXT="\033[31m"
+    RESET_TEXT="\033[0m"
+
+    
     def self.testrun(options)
       puts `clear`
-      puts "RUNNING TESTS..."
+      puts "#{YELLOW_TEXT}RUNNING TESTS...#{RESET_TEXT}"
       
       cmd = options[:test_command]
       test_output = `#{cmd}`
       test_succeded = Keeptesting::Common::test_success?(test_output, options[:failure_regex])
       puts `clear`
       if test_succeded
-        puts "SUCCESS!\n\n\n"
+        puts "#{GREEN_TEXT}SUCCESS!#{RESET_TEXT}\n\n\n"
       else
-        puts "FAILURE!\n\n\n"
+        puts "#{RED_TEXT}FAILURE!#{RESET_TEXT}\n\n\n"
       end
 
       puts test_output
