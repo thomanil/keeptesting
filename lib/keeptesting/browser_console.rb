@@ -15,9 +15,13 @@ module Keeptesting
     
     RESULT_FILE_PATH = "/tmp/keeptesting-state.txt"
     
-    def store_last_test_summary(result, output)
+    def store_last_test_summary(success, output)
       File.open RESULT_FILE_PATH, "w" do |filebody|
-        filebody.write("#{result.to_s}\n")
+        if success
+          filebody.write("success\n")
+        else
+          filebody.write("failure\n")
+        end
         filebody.write(output)
       end
     end
