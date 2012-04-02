@@ -16,6 +16,8 @@ USAGE:
 
 `keeptesting [options] -f REGEX_MATCHING_TEST_FAILURE -t TEST_COMMAND`
 
+By default, launch it in the root of your project.
+
 
 EXAMPLES:
 ======
