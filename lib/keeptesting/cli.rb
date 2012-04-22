@@ -28,11 +28,16 @@ module Keeptesting
 
     def self.start_test_loop(options)
       Keeptesting::CLI::testrun(options)
-      FSSM.monitor('.', '**/*') do
-        update {|base, relative| Keeptesting::CLI::testrun(options)}
-        delete {|base, relative| Keeptesting::CLI::testrun(options)}
-        create {|base, relative| Keeptesting::CLI::testrun(options)}
+      FSSM.monitor do
+        options[:watched_paths].each do |watched_path|
+          path watched_path do
+            update {|base, relative| Keeptesting::CLI::testrun(options)}
+            delete {|base, relative| Keeptesting::CLI::testrun(options)}
+            create {|base, relative| Keeptesting::CLI::testrun(options)}
+          end
+        end
       end
     end
+    
   end
 end

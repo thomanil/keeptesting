@@ -47,10 +47,14 @@ module Keeptesting
       Thread.new do
         console = self
         console.testrun(options)
-        FSSM.monitor('.', '**/*') do
-          update {|base, relative| console.testrun(options)}
-          delete {|base, relative| console.testrun(options)}
-          create {|base, relative| console.testrun(options)}
+        FSSM.monitor do
+          options[:watched_paths].each do |watched_path|
+            path watched_path do
+              update {|base, relative| console.testrun(options)}
+              delete {|base, relative| console.testrun(options)}
+              create {|base, relative| console.testrun(options)}
+            end
+          end
         end
       end
     end

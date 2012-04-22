@@ -42,7 +42,7 @@ INSTALL:
 TODO:
 =====
 
-
+(See todo.org)
 
 
 LICENSE:

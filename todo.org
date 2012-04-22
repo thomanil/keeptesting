@@ -1,16 +1,13 @@
-* improve web console
-**  show error when backend is down
-**  prettier html output
-**  less chatty communication w. server, use websockets?
 * improve overall interface
-** support simplified usage: keeptesting REGEX TEST_CMD
-** set defaults for common test frameworks
-** add options to constrain/exclude filetypes and paths
 ** .keeptesting
 ***  enable dotfile for standard options
 ***  can just start with keeptesting w/o options
 * swap out fssm w/ guard/listen
 ** fssm is dead!
+* improve web console
+**  show error when backend is down
+**  prettier html output
+**  less chatty communication w. server, use websockets?
 * test that everything works x-platform
 * create proper documentation
 ** website

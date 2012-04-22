@@ -4,21 +4,68 @@ require "keeptesting"
 require "optparse"
 require 'fssm'
 
+
+
+def usage
+  <<USAGE
+
+Usage: keeptesting [options] 'FAILURE-MATCHING-REGEX' 'TEST-COMMAND'
+
+Run tests whenever files change in the current directory or subdirectories.
+
+Spits back indication of test success or failure, based on specified regex
+that detects errors/failures in the output of a test run.
+Starts embedded webserver by default, letting you see test feedback in browser
+window. Can also run in the command line.
+
+Note: Be sure to use quotes around params like the examples!
+
+Examples:
+
+keeptesting 'Error|Failure' 'rake test'                       (Run tests whenever anything changes)
+keeptesting -p 'test' -p 'lib' -c 'Error|Failure' 'rake test' (Test on changes in test/ or lib/)
+
+  -c, --command-line-mode       Commandline mode
+  -p, --watched-path            Path to watch for changes 
+  -h, --help                    Display usage
+  -v, --version                 Display version number
+
+USAGE
+end
+
+
+
 def parse_options
   options = {}
-
-  OptionParser.new do |o|
-    o.banner = "Usage: keeptesting [options] -f 'FAILURE-MATCHING-REGEX' -t 'TEST-COMMAND'\n\n"
     
-    o.on("-f F", "--failure-matching-regex", "A regex that matches failing tests") { |f| options[:failure_regex] = f } 
-    o.on("-t T", "--test-command", "Command to start your test(s)") { |t| options[:test_command] = t }
+  ARGV.each do |arg|
+    if arg == "-v" || arg == "--version"
+      puts Keeptesting::VERSION; exit
+    elsif arg == "-h" || arg == "--help"
+      puts usage; exit
+    end
+  end
 
-    o.on("-c", "--command-line-mode", "Get test feedback in terminal") { options[:cli_mode] = true}
+  if ARGV.size < 2
+    puts usage; exit
+  end
+
+  options[:failure_regex] = ARGV[ARGV.size-2]
+  options[:test_command] = ARGV[ARGV.size-1]
+  
+  ARGV.each_with_index do |arg, i|
+    if arg == "-c" || arg == "--command-line-mode"
+      options[:cli_mode] = true
+    end
     
-    o.on("-h", "--help", "Help page") { puts o; exit }
-    o.on("-v", "--version", "Print version number") { |b| puts Keeptesting::VERSION; exit }
+    if arg == "-p" || arg == "--watched-path"
+      options[:watched_paths] ||= []
+      options[:watched_paths] << ARGV[i+1]
+    end
+  end
 
-    o.parse!
+  if !options[:watched_paths]
+    options[:watched_paths] == ["**/*"]
   end
 
   return options
@@ -27,14 +74,8 @@ end
 
 options = parse_options
 
-if !options[:failure_regex] || !options[:test_command]
-  puts "ERROR: missing args!" # TODO do this in optionsparse step above
-end
-
 if options[:cli_mode]
   Keeptesting::CLI::start_test_loop(options)
 else
   Keeptesting::BrowserConsole.new(options)
 end
-
-
