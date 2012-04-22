@@ -4,24 +4,19 @@
         what happens?
         blank output in web
     show error when backend is down
-    pretties html
+    prettier html output
+    less chatty communication w. server, use websockets?
 * improve overall interface
+    support simplified usage: keeptesting REGEX TEST_CMD
     set defaults for common test frameworks
     add options to constrain/exclude filetypes and paths
-    .retestit
+    .keeptesting
         enable dotfile for standard options
         can just start with keeptesting w/o options
-    read the CLI ruby book
 * test that everything works x-platform
 * create proper documentation
     website
     great readme page with screencaptures and workflow examples
     screencast
     blog post - release announcement
-* get feedback
-    johannes
-    christian & august
-    marius
-    irb.no
-    some others in my twitter stream
 * release 1.0

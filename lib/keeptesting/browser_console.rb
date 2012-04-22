@@ -38,7 +38,7 @@ module Keeptesting
     
     def testrun(options)
       cmd = options[:test_command]
-      test_output = `#{cmd}`
+      test_output = `#{cmd} 2>&1`
       test_succeeded = Keeptesting::Common::test_success?(test_output, options[:failure_regex])
       store_last_test_summary(test_succeeded, test_output)
     end

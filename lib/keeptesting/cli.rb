@@ -14,7 +14,7 @@ module Keeptesting
       puts "#{YELLOW_TEXT}RUNNING TESTS...#{RESET_TEXT}"
       
       cmd = options[:test_command]
-      test_output = `#{cmd}`
+      test_output = `#{cmd} 2>&1`
       test_succeded = Keeptesting::Common::test_success?(test_output, options[:failure_regex])
       puts `clear`
       if test_succeded
