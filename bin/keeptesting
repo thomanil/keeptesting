@@ -12,9 +12,9 @@ def usage
 Usage: keeptesting [options] 'FAILURE-MATCHING-REGEX' 'TEST-COMMAND'
 
 Run tests whenever files change in the current directory or subdirectories.
-
-Spits back indication of test success or failure, based on specified regex
+Display indication of test success or failure, based on given regex
 that detects errors/failures in the output of a test run.
+
 Starts embedded webserver by default, letting you see test feedback in browser
 window. Can also run in the command line.
 
@@ -26,8 +26,10 @@ Note: Be sure to use quotes around params like the examples!
 
 Examples:
 
-keeptesting 'Error|Failure' 'rake test'                       (Run tests whenever anything changes)
-keeptesting -p 'test' -p 'lib' -c 'Error|Failure' 'rake test' (Test on changes in test/ or lib/)
+keeptesting 'Error|Failure' 'rake test'                        Run tests whenever anything changes
+keeptesting -p 'test' -p 'lib' -c 'Error|Failure' 'rake test'  Test on changes in test/ or lib/
+keeptesting -d 'Error|Failure' 'rake test'                     Store current config in .keeptesting
+keeptesting                                                    Run using .keeptesting config file
 
   -c, --command-line-mode       Commandline mode
   -p, --watched-path            Path to watch for changes 
