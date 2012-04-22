@@ -2,8 +2,8 @@
 
 require "keeptesting"
 require "optparse"
-require 'fssm'
-
+require "fssm"
+require "yaml"
 
 
 def usage
@@ -18,6 +18,10 @@ that detects errors/failures in the output of a test run.
 Starts embedded webserver by default, letting you see test feedback in browser
 window. Can also run in the command line.
 
+If you have a .keeptesting dotfile present, you can just type 'keeptesting' to
+run with the options, error detection and test command etc specified in
+the dotfile.
+
 Note: Be sure to use quotes around params like the examples!
 
 Examples:
@@ -27,6 +31,7 @@ keeptesting -p 'test' -p 'lib' -c 'Error|Failure' 'rake test' (Test on changes i
 
   -c, --command-line-mode       Commandline mode
   -p, --watched-path            Path to watch for changes 
+  -d, --store-dotfile           Save current keeptesting config in dotfile
   -h, --help                    Display usage
   -v, --version                 Display version number
 
@@ -34,10 +39,13 @@ USAGE
 end
 
 
-
 def parse_options
   options = {}
-    
+
+  if ARGV.size == 0
+    return YAML.load(File.read(".keeptesting"))
+  end
+  
   ARGV.each do |arg|
     if arg == "-v" || arg == "--version"
       puts Keeptesting::VERSION; exit
@@ -68,6 +76,12 @@ def parse_options
     options[:watched_paths] == ["**/*"]
   end
 
+  if ARGV.include?("-d") || ARGV.include?("--store-dotfile") 
+    File.open(".keeptesting", "w+") do |f|
+      f.write(YAML::dump(options))
+    end
+  end
+  
   return options
 end
 

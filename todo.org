@@ -1,7 +1,3 @@
-* improve overall interface
-** .keeptesting
-***  enable dotfile for standard options
-***  can just start with keeptesting w/o options
 * swap out fssm w/ guard/listen
 ** fssm is dead!
 * improve web console
