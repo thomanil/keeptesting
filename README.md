@@ -30,9 +30,13 @@ the dotfile.
 Note: Be sure to use quotes around params like the examples!
 
 `-c, --command-line-mode`       Commandline mode
-`-p, --watched-path`            Path to watch for changes 
+
+`-p, --watched-path`            Path to watch for changes
+
 `-d, --store-dotfile`           Save current keeptesting config in dotfile
+
 `-h, --help`                    Display usage
+
 `-v, --version`                 Display version number
 
 
