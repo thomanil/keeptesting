@@ -4,6 +4,7 @@
 **  show error when backend is down
 **  prettier html output
 **  less chatty communication w. server, use websockets?
+**  show yellow/working feedback (need websocket/push for this)
 * test that everything works x-platform
 * create proper documentation
 ** website
