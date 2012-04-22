@@ -29,24 +29,20 @@ the dotfile.
 
 Note: Be sure to use quotes around params like the examples!
 
-`-c, --command-line-mode`       Commandline mode
-
-`-p, --watched-path`            Path to watch for changes
-
-`-d, --store-dotfile`           Save current keeptesting config in dotfile
-
-`-h, --help`                    Display usage
-
-`-v, --version`                 Display version number
+* `-c, --command-line-mode` : Commandline mode
+* `-p, --watched-path` : Path to watch for changes
+* `-d, --store-dotfile` : Save current keeptesting config in dotfile
+* `-h, --help` : Display usage
+* `-v, --version` : Display version number
 
 
 EXAMPLES:
 ======
 
-`keeptesting 'Error|Failure' 'rake test'`                    Run tests whenever anything changes
-`keeptesting -p 'test' -p 'lib' 'Error|Failure' 'rake test'` Test on changes in test/ or lib/
-`keeptesting -d 'Error|Failure' 'rake test'`                 Store current config in .keeptesting
-`keeptesting`                                                Run using .keeptesting config file
+*`keeptesting 'Error|Failure' 'rake test'` : Run tests whenever anything changes
+*`keeptesting -p 'test' -p 'lib' 'Error|Failure' 'rake test'`: Test on changes in test/ or lib/
+*`keeptesting -d 'Error|Failure' 'rake test'`: Store current config in .keeptesting
+*`keeptesting` : Run using .keeptesting config file
 
 
 PREREQUISITES:
