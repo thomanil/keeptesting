@@ -9,22 +9,45 @@ Run it from the command line. Specify 1) how tests are launched and 2)
 how a failed test looks in the terminal.
 
 The tests will run on every file change in your project - results are
-fed back through a pretty html console.
+fed back through a pretty html console, or on the commandline.
 
 USAGE:
 ======
 
-`keeptesting [options] -f REGEX_MATCHING_TEST_FAILURE -t TEST_COMMAND`
+`keeptesting [options] 'FAILURE-MATCHING-REGEX' 'TEST-COMMAND'`
 
-By default, launch it in the root of your project.
+Run tests whenever files change in the current directory or subdirectories.
+
+Spits back indication of test success or failure, based on specified regex
+that detects errors/failures in the output of a test run.
+Starts embedded webserver by default, letting you see test feedback in browser
+window. Can also run in the command line.
+
+If you have a .keeptesting dotfile present, you can just type 'keeptesting' to
+run with the options, error detection and test command etc specified in
+the dotfile.
+
+Note: Be sure to use quotes around params like the examples!
+
+keeptesting 'Error|Failure' 'rake test'                        Run tests whenever anything changes
+keeptesting -p 'test' -p 'lib' -c 'Error|Failure' 'rake test'  Test on changes in test/ or lib/
+keeptesting -d 'Error|Failure' 'rake test'                     Store current config in .keeptesting
+keeptesting                                                    Run using .keeptesting config file
+
+  -c, --command-line-mode       Commandline mode
+  -p, --watched-path            Path to watch for changes 
+  -d, --store-dotfile           Save current keeptesting config in dotfile
+  -h, --help                    Display usage
+  -v, --version                 Display version number
 
 
 EXAMPLES:
 ======
 
-In ruby:
-
-`keeptesting -f 'Failure|Error' -t 'rake test'`
+`keeptesting 'Error|Failure' 'rake test'`                        Run tests whenever anything changes
+`keeptesting -p 'test' -p 'lib' 'Error|Failure' 'rake test'`     Test on changes in test/ or lib/
+`keeptesting -d 'Error|Failure' 'rake test'`                     Store current config in .keeptesting
+`keeptesting`                                                    Run using .keeptesting config file
 
 
 PREREQUISITES:
