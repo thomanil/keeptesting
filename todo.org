@@ -11,4 +11,5 @@
 ** great readme page with screencaptures and workflow examples
 ** screencast
 ** blog post - release announcement
+* final code cleanup
 * release 1.0

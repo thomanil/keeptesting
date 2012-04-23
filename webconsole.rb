@@ -25,10 +25,10 @@ def index
 
     <style>
       .red {
-      background-color: red;
+      background-color: #FF3B3B;
       }
       .green {
-      background-color: green;
+      background-color: #3BFF3E;
       }
     </style>
     
@@ -77,7 +77,7 @@ var showLastTest = function(){
 };
 
 $(document).ready(function(){
-  setInterval(showLastTest, 1000);
+  setInterval(showLastTest, 300);
 });
 JAVASCRIPT
 end
