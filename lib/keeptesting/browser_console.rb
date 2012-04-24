@@ -14,13 +14,19 @@ module Keeptesting
     end
     
     RESULT_FILE_PATH = "/tmp/keeptesting-state.txt"
-    
+
+    def store_running_status
+      File.open RESULT_FILE_PATH, "w" do |filebody|
+          filebody.write("Running tests...\n")
+      end
+    end
+
     def store_last_test_summary(success, output)
       File.open RESULT_FILE_PATH, "w" do |filebody|
         if success
-          filebody.write("success\n")
+          filebody.write("Success\n")
         else
-          filebody.write("failure\n")
+          filebody.write("Failure\n")
         end
         filebody.write(output)
       end
@@ -37,12 +43,13 @@ module Keeptesting
     end
     
     def testrun(options)
+      store_running_status
       cmd = options[:test_command]
       test_output = `#{cmd} 2>&1`
       test_succeeded = Keeptesting::Common::test_success?(test_output, options[:failure_regex])
       store_last_test_summary(test_succeeded, test_output)
     end
-
+      
     def watch_files(options)
       Thread.new do
         console = self
@@ -61,7 +68,7 @@ module Keeptesting
 
     def start_console      
       webconsole_path = File.dirname(__FILE__) + '/../../webconsole.rb'
-      puts "\n\n\n*** keeptesting web console starting - goto http://localhost:5000 ***\n\n\n"
+      puts "\n\n\nWeb console ready at http://localhost:5000\n\n\n"
       puts `ruby #{webconsole_path} -e development -p 5000`
     end
    

@@ -21,7 +21,7 @@ def index
     <meta charset="utf-8">
     <title>Keeptesting</title>
   </head>
-  <body>
+  <body class="yellow">
 
     <style>
       .red {
@@ -30,9 +30,12 @@ def index
       .green {
       background-color: #3BFF3E;
       }
+      .yellow {
+      background-color: #FFCB3B;
+      }
     </style>
     
-    <h1>Keep testing!</h1>
+    <h1>Starting up!</h1>
     
     <div id="test-output">
        Waiting for first test result...
@@ -65,10 +68,18 @@ var showLastTest = function(){
     var result = last_test.result;
 
     header.html(result);
-    if(result.match(/success/)){
-      body.removeClass("red").addClass("green");
-    } else {
-      body.removeClass("green").addClass("red");
+    body.removeClass("red green yellow")
+
+    if(result.match(/Success/)){
+      body.addClass("green");
+    }
+
+    if(result.match(/Running/)){
+      body.addClass("yellow");
+    }
+
+    if(result.match(/Failure/)){
+      body.addClass("red");
     }
 
     var test_output = last_test.output;

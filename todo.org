@@ -1,15 +1,13 @@
-* swap out fssm w/ guard/listen
-** fssm is dead!
 * improve web console
 **  show error when backend is down
 **  prettier html output
-**  less chatty communication w. server, use websockets?
-**  show yellow/working feedback (need websocket/push for this)
+* swap out fssm w/ guard/listen
+** fssm is dead!
 * test that everything works x-platform
+* final code cleanup
 * create proper documentation
 ** website
 ** great readme page with screencaptures and workflow examples
 ** screencast
 ** blog post - release announcement
-* final code cleanup
 * release 1.0
