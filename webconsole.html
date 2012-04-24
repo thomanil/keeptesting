@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+    <title>Keeptesting</title>
+  </head>
+  <body class="yellow">
+
+    <style>
+      .red {
+      background-color: #FF3B3B;
+      }
+      .green {
+      background-color: #3BFF3E;
+      }
+      .yellow {
+      background-color: #FFCB3B;
+      }
+    </style>
+    
+    <h1>Starting up!</h1>
+    
+    <div id="test-output">
+       Waiting for first test result...
+    <div>
+
+<script>
+var showLastTest = function(){
+  $.get("/latest-test-json", function(data) {
+    var header = $("h1");
+    var last_test = data;
+    var test_output_div = $("#test-output");
+    var body = $("body")
+    var result = last_test.result;
+
+    header.html(result);
+    body.removeClass("red green yellow")
+
+    if(result.match(/Success/)){
+      body.addClass("green");
+    }
+
+    if(result.match(/Running/)){
+      body.addClass("yellow");
+    }
+
+    if(result.match(/Failure/)){
+      body.addClass("red");
+    }
+
+    var test_output = last_test.output;
+    test_output_div.html("<pre>"+test_output+"</pre");
+  }, "json");
+};
+
+$(document).ready(function(){
+  setInterval(showLastTest, 300);
+});  
+</script>
+
+
+
+  </body>
+</html>

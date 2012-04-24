@@ -17,7 +17,7 @@ module Keeptesting
 
     def store_running_status
       File.open RESULT_FILE_PATH, "w" do |filebody|
-          filebody.write("Running tests...\n")
+          filebody.write("Running\n")
       end
     end
 
@@ -68,7 +68,7 @@ module Keeptesting
 
     def start_console      
       webconsole_path = File.dirname(__FILE__) + '/../../webconsole.rb'
-      puts "\n\n\nWeb console ready at http://localhost:5000\n\n\n"
+      puts "\n\n\nWeb console starting up, goto http://localhost:5000\n\n\n"
       puts `ruby #{webconsole_path} -e development -p 5000`
     end
    
