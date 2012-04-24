@@ -1,13 +1,28 @@
+* fix cli interface
+** handle multiple options on same dash (-cd..)
+** if no paths given, use */** by default
+** ... test more combinations of options
 * improve web console
 **  show error when backend is down
 **  prettier html output
+*** body still colored (tweak color)
+*** but output/header in rounded, semi-transp boxes
+*** more fanciness?
+**** show watched directories, test command etc?
+**** show keeptesting title/version?
+**** anything else useful?
 * swap out fssm w/ guard/listen
 ** fssm is dead!
 * test that everything works x-platform
 * final code cleanup
-* create proper documentation
-** website
-** great readme page with screencaptures and workflow examples
-** screencast
-** blog post - release announcement
+** add tests?
+** make super easy to follow structure
+* proper documentation
+** great readme
+*** redgreen nice-typeface logo
+
+*** screenshots
+*** link to screencast (if not embeddable in markdown)
+*** user documentation
+*** call for pull requests + developer guideline/doc
 * release 1.0
