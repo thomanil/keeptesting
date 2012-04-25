@@ -1,5 +1,6 @@
 * improve web console
 **  show error when backend is down
+**  stop sinatra from dumping internal stuff to stdout
 **  make sure it looks ok in IE6,7,8
 **  test offline, add local copy of jquery, cut cdn dep
 * swap out fssm w/ guard/listen
