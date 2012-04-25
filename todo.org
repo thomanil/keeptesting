@@ -1,18 +1,13 @@
+* improve web console
+**  show error when backend is down
+**  make sure it looks ok in IE6,7,8
+**  test offline, add local copy of jquery, cut cdn dep
+* swap out fssm w/ guard/listen
+** fssm is dead!
 * fix cli interface
 ** handle multiple options on same dash (-cd..)
 ** if no paths given, use */** by default
 ** ... test more combinations of options
-* improve web console
-**  show error when backend is down
-**  prettier html output
-*** body still colored (tweak color)
-*** but output/header in rounded, semi-transp boxes
-*** more fanciness?
-**** show watched directories, test command etc?
-**** show keeptesting title/version?
-**** anything else useful?
-* swap out fssm w/ guard/listen
-** fssm is dead!
 * test that everything works x-platform
 * final code cleanup
 ** add tests?

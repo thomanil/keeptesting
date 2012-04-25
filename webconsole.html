@@ -17,16 +17,38 @@
       .yellow {
       background-color: #FFCB3B;
       }
+      h1 {
+      -webkit-border-radius: 7px;
+      -moz-border-radius: 7px;
+      border-radius: 7px;
+      background-color: white;
+      margin: 50px 50px 50px 50px;
+      padding: 20px 20px 20px 20px;
+      background-color: white;
+      background-color: rgba(255,255,255,0.5);
+      font-family: Helvetica, Georgia;
+      }
+      #test-output {
+      -webkit-border-radius: 7px;
+      -moz-border-radius: 7px;
+      border-radius: 7px;
+      margin: 50px 50px 50px 50px;
+      padding: 20px 20px 20px 20px;
+      background-color: white;
+      background-color: rgba(255,255,255,0.5);
+      font-family: sans-serif;
+      }
     </style>
     
-    <h1>Starting up!</h1>
-    
+    <h1>Starting</h1>
+
     <div id="test-output">
-       Waiting for first test result...
+      Waiting for first test result...
     <div>
 
+            
 <script>
-var showLastTest = function(){
+  var showLastTest = function(){
   $.get("/latest-test-json", function(data) {
     var header = $("h1");
     var last_test = data;
@@ -35,22 +57,24 @@ var showLastTest = function(){
     var result = last_test.result;
 
     header.html(result);
+    var test_output = last_test.output;
+    test_output_div.html("<pre>"+test_output+"</pre");
+
     body.removeClass("red green yellow")
 
     if(result.match(/Success/)){
       body.addClass("green");
     }
 
-    if(result.match(/Running/)){
-      body.addClass("yellow");
-    }
-
     if(result.match(/Failure/)){
       body.addClass("red");
     }
+    
+    if(result.match(/Running/)){
+      body.addClass("yellow");
+      test_output_div.html("Waiting for result...");
+    }
 
-    var test_output = last_test.output;
-    test_output_div.html("<pre>"+test_output+"</pre");
   }, "json");
 };
 
