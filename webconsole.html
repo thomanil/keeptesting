@@ -17,6 +17,10 @@
       .yellow {
       background-color: #FFCB3B;
       }
+     .purple {
+      background-color: #793BFF;
+      }
+      
       h1 {
       -webkit-border-radius: 7px;
       -moz-border-radius: 7px;
@@ -48,19 +52,18 @@
 
             
 <script>
-  var showLastTest = function(){
-  $.get("/latest-test-json", function(data) {
+  var handleLastestTestState = function(data) {
     var header = $("h1");
-    var last_test = data;
+    var last_test = $.parseJSON(data);
     var test_output_div = $("#test-output");
-    var body = $("body")
+    var body = $("body");
     var result = last_test.result;
 
     header.html(result);
     var test_output = last_test.output;
     test_output_div.html("<pre>"+test_output+"</pre");
 
-    body.removeClass("red green yellow")
+    body.removeClass("red green yellow purple")
 
     if(result.match(/Success/)){
       body.addClass("green");
@@ -74,13 +77,25 @@
       body.addClass("yellow");
       test_output_div.html("Waiting for result...");
     }
+  };
 
-  }, "json");
-};
+  var handleError = function(jqXHR, textStatus, errorThrown){
+      $("body").addClass("purple");
+      $("h1").html("Test data unavailable");
+      $("#test-output").html("Is the keeptesting tool not running anymore?");
+  };
+  
+  var showLastTest = function(){
+     $.ajax({ url: "/latest-test-json",
+              success: handleLastestTestState,
+              error: handleError,
+              datatype: "json"
+            });
+  };
 
-$(document).ready(function(){
-  setInterval(showLastTest, 300);
-});  
+  $(document).ready(function(){
+    setInterval(showLastTest, 300);
+  });
 </script>
 
 
