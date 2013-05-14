@@ -1,6 +1,6 @@
-* depend on onchange for monitoring/running tests?
+* finalize cli interface
+** depend on onchange for monitoring/running tests?
   reuse options etc, just add a few params?
-* fix cli interface
 ** simplify usage?
 ** handle multiple options on same dash (-cd..)
 ** handle multiple paths
@@ -8,17 +8,17 @@
 ** if no paths given, use */** by default
 ** make sure it doesnt die on exceptions/failures
 ** test more combinations of options
-* what happens if new run starts before last finished?
-* final code cleanup
-** add tests?
-* test that everything works x-platform
-  mac, linux
-* proper documentation
-** great readme
-*** screenshots
-*** user documentation
-* gpl 3
+* test edge cases/likely problems
+** make sure I can kick it to the background without issues
+** what happens if last run not finished once new run starts? queue, skip, what?
+** make sure it doesn't die/hang on exceptions/errors etc
 * release 1.0
+** final code cleanup
+   add tests?
+** test that everything works x-platform
+  mac, linux
+** gpl3
+** polished README
 ** blog about it
 "keeptesting: how to auto-test anything"
 
