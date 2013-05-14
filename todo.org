@@ -1,24 +1,28 @@
-* improve web console
-**  show error when backend is down
-**  stop sinatra from dumping internal stuff to stdout
-**  make sure it looks ok in IE6,7,8
-**  test offline, add local copy of jquery, cut cdn dep
-* swap out fssm w/ guard/listen
-** fssm is dead!
+* depend on onchange for monitoring/running tests?
+  reuse options etc, just add a few params?
 * fix cli interface
+** simplify usage?
 ** handle multiple options on same dash (-cd..)
+** handle multiple paths
+** only call emacsclient if present on system
 ** if no paths given, use */** by default
-** ... test more combinations of options
-* test that everything works x-platform
+** make sure it doesnt die on exceptions/failures
+** test more combinations of options
+* what happens if new run starts before last finished?
 * final code cleanup
 ** add tests?
-** make super easy to follow structure
+* test that everything works x-platform
+  mac, linux
 * proper documentation
 ** great readme
-*** redgreen nice-typeface logo
-
 *** screenshots
-*** link to screencast (if not embeddable in markdown)
 *** user documentation
-*** call for pull requests + developer guideline/doc
+* gpl 3
 * release 1.0
+** blog about it
+"keeptesting: how to auto-test anything"
+
+"I regularly use TDD for development, and when I do so I enjoy
+autotesting. Don't want to use different tools for each
+language/platform, scenario, since underlying process is the same:
+run tests from shell, run on each file change, react to change to/from test failure"

@@ -31,8 +31,7 @@ keeptesting -p 'test' -p 'lib' -c 'Error|Failure' 'rake test'  Test on changes i
 keeptesting -d 'Error|Failure' 'rake test'                     Store current config in .keeptesting
 keeptesting                                                    Run using .keeptesting config file
 
-  -c, --command-line-mode       Commandline mode
-  -p, --watched-path            Path to watch for changes 
+  -p, --watched-path            Path to watch for changes
   -d, --store-dotfile           Save current keeptesting config in dotfile
   -h, --help                    Display usage
   -v, --version                 Display version number
@@ -47,7 +46,7 @@ def parse_options
   if ARGV.size == 0
     return YAML.load(File.read(".keeptesting"))
   end
-  
+
   ARGV.each do |arg|
     if arg == "-v" || arg == "--version"
       puts Keeptesting::VERSION; exit
@@ -62,12 +61,8 @@ def parse_options
 
   options[:failure_regex] = ARGV[ARGV.size-2]
   options[:test_command] = ARGV[ARGV.size-1]
-  
+
   ARGV.each_with_index do |arg, i|
-    if arg == "-c" || arg == "--command-line-mode"
-      options[:cli_mode] = true
-    end
-    
     if arg == "-p" || arg == "--watched-path"
       options[:watched_paths] ||= []
       options[:watched_paths] << ARGV[i+1]
@@ -78,20 +73,15 @@ def parse_options
     options[:watched_paths] == ["**/*"]
   end
 
-  if ARGV.include?("-d") || ARGV.include?("--store-dotfile") 
+  if ARGV.include?("-d") || ARGV.include?("--store-dotfile")
     File.open(".keeptesting", "w+") do |f|
       f.write(YAML::dump(options))
     end
   end
-  
+
   return options
 end
 
 
 options = parse_options
-
-if options[:cli_mode]
-  Keeptesting::CLI::start_test_loop(options)
-else
-  Keeptesting::BrowserConsole.new(options)
-end
+Keeptesting::CLI::start_test_loop(options)

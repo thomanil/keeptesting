@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.authors     = ["Thomas Kjeldahl Nilsson"]
   s.email       = ["thomas@kjeldahlnilsson.net"]
   s.homepage    = "https://github.com/thomanil/keeptesting"
-  s.summary     = %q{A stripped down CLI utility for reading tweets}
+  s.summary     = %q{A platform/language agnostic autotest tool}
   s.description = %q{Usage: keeptesting [options] TESTCOMMAND}
 
   s.rubyforge_project = "keeptesting"
@@ -21,10 +21,9 @@ Gem::Specification.new do |s|
   # specify any dependencies here; for example:
   # s.add_development_dependency "rspec"
   s.add_runtime_dependency "fssm"
-  s.add_runtime_dependency "sinatra"
-  
+
   s.add_development_dependency "mocha"
   s.add_development_dependency "minitest"
   s.add_development_dependency "shoulda"
-  s.add_development_dependency "shoulda-context"  
+  s.add_development_dependency "shoulda-context"
 end
